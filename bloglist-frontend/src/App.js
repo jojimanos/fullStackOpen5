@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import login from './services/login'
 import LoginForm from './components/loginForm'
-import BlogForm from './components/blogForm'
+import BlogForm from './components/BlogForm'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -17,7 +18,8 @@ const App = () => {
   const [title, setTitle] = useState("")
   const [url, setUrl] = useState("")
 
-  const [toggleBlogForm, setToggleBlogForm] = useState(false)
+
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -65,6 +67,7 @@ const App = () => {
         setErrorMessage("")
       }, 5000)
     }
+    blogFormRef.current.toggleVisibility()
   }
 
   const handleLogout = () => {
@@ -90,28 +93,21 @@ const App = () => {
       {user ?
         <>
           <h3>Welcome {user.userName} <button onClick={handleLogout}>Logout</button></h3>
-          {toggleBlogForm ?
-            <>
-              <BlogForm
-                handleCreate={handleCreate}
-                author={author}
-                title={title}
-                url={url}
-                setAuthor={setAuthor}
-                setTitle={setTitle}
-                setUrl={setUrl}
-              />
-              <br/>
-              <button onClick={() => {setToggleBlogForm(!toggleBlogForm)}}>cancel</button>
-            </>
-            :
-            <>
-            <button onClick={() => {setToggleBlogForm(!toggleBlogForm)}}>create new note</button>
-            <br/>
-            </>
-            }
-          {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} />
+          <Togglable
+            ref={blogFormRef}
+          >
+            <BlogForm
+              handleCreate={handleCreate}
+              author={author}
+              title={title}
+              url={url}
+              setAuthor={setAuthor}
+              setTitle={setTitle}
+              setUrl={setUrl}
+            />
+          </Togglable>
+          {blogs.sort((blogA, blogB) => blogB.likes-blogA.likes).map(blog =>
+            <Blog key={blog.id} blog={blog} blogsArray={blogs} setBlogs={setBlogs} />
           )}
         </>
         :

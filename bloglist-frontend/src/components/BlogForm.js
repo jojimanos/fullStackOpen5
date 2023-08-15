@@ -1,9 +1,9 @@
-const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUrl }) => {
+const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUrl, toggleBlogForm, setToggleBlogForm }) => {
     return (
         <>
             <form onSubmit={handleCreate}>
                 <div>
-                    auhtor <input
+                    author <input
                         type="text"
                         value={author}
                         name="Author"
@@ -35,4 +35,4 @@ const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUr
     )
 }
 
-export default BlogForm;
+export default BlogForm
