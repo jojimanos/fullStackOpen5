@@ -17,6 +17,8 @@ const App = () => {
   const [title, setTitle] = useState("")
   const [url, setUrl] = useState("")
 
+  const [toggleBlogForm, setToggleBlogForm] = useState(false)
+
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
@@ -83,20 +85,31 @@ const App = () => {
   return (
     <div>
       <h2>{user ? "blogs" : "Login"}</h2>
-      {errorMessage.length !== 0  && <h1 className='error'>{errorMessage}</h1>}
+      {errorMessage.length !== 0 && <h1 className='error'>{errorMessage}</h1>}
       {successMessage.length !== 0 && <h1 className='success'>{successMessage}</h1>}
       {user ?
         <>
           <h3>Welcome {user.userName} <button onClick={handleLogout}>Logout</button></h3>
-          <BlogForm
-            handleCreate={handleCreate}
-            author={author}
-            title={title}
-            url={url}
-            setAuthor={setAuthor}
-            setTitle={setTitle}
-            setUrl={setUrl}
-          />
+          {toggleBlogForm ?
+            <>
+              <BlogForm
+                handleCreate={handleCreate}
+                author={author}
+                title={title}
+                url={url}
+                setAuthor={setAuthor}
+                setTitle={setTitle}
+                setUrl={setUrl}
+              />
+              <br/>
+              <button onClick={() => {setToggleBlogForm(!toggleBlogForm)}}>cancel</button>
+            </>
+            :
+            <>
+            <button onClick={() => {setToggleBlogForm(!toggleBlogForm)}}>create new note</button>
+            <br/>
+            </>
+            }
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
           )}

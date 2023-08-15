@@ -1,29 +1,29 @@
-const LoginForm = ({user, handleLogin, userName, password, setUserName, setPassword }) => {
-    return (
-<>   
+const LoginForm = ({ user, handleLogin, userName, password, setUserName, setPassword }) => {
+  return (
+    <>
       <form onSubmit={handleLogin}>
         <div>
           username <input
-          type='text'
-          value={userName}
-          name="Username"
-          onChange={(event) => {setUserName(event.target.value)}}
+            type='text'
+            value={userName}
+            name="Username"
+            onChange={(event) => { setUserName(event.target.value) }}
           />
         </div>
-        <br/>
+        <br />
         <div>
           password <input
-          type='text'
-          value={password}
-          name="Password"
-          onChange={(event) => {setPassword(event.target.value)}}
+            type='text'
+            value={password}
+            name="Password"
+            onChange={(event) => { setPassword(event.target.value) }}
           />
         </div>
-        <br/>
+        <br />
         <button type="submit">login</button>
       </form>
-   </>
-    )
+    </>
+  )
 }
 
 export default LoginForm

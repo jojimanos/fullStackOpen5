@@ -1,34 +1,34 @@
-const BlogForm = ({handleCreate, author, setAuthor, title, setTitle, url, setUrl}) => {
+const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUrl }) => {
     return (
         <>
             <form onSubmit={handleCreate}>
                 <div>
                     auhtor <input
-                    type="text"
-                    value={author}
-                    name="Author"
-                    onChange={(event) => {setAuthor(event.target.value)}}
+                        type="text"
+                        value={author}
+                        name="Author"
+                        onChange={(event) => { setAuthor(event.target.value) }}
                     />
                 </div>
-                <br/>
+                <br />
                 <div>
                     title <input
-                    type="text"
-                    value={title}
-                    name="Title"
-                    onChange={(event) => {setTitle(event.target.value)}}
+                        type="text"
+                        value={title}
+                        name="Title"
+                        onChange={(event) => { setTitle(event.target.value) }}
                     />
                 </div>
-                <br/>
+                <br />
                 <div>
                     url <input
-                    type="text"
-                    value={url}
-                    name="Url"
-                    onChange={(event) => {setUrl(event.target.value)}}
+                        type="text"
+                        value={url}
+                        name="Url"
+                        onChange={(event) => { setUrl(event.target.value) }}
                     />
                 </div>
-                <br/>
+                <br />
                 <button type="submit">Create</button>
             </form>
         </>
