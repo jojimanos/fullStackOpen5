@@ -1,4 +1,4 @@
-const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUrl, toggleBlogForm, setToggleBlogForm }) => {
+const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUrl }) => {
     return (
         <>
             <form onSubmit={handleCreate}>

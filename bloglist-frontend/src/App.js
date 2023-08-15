@@ -106,8 +106,15 @@ const App = () => {
               setUrl={setUrl}
             />
           </Togglable>
-          {blogs.sort((blogA, blogB) => blogB.likes-blogA.likes).map(blog =>
-            <Blog key={blog.id} blog={blog} blogsArray={blogs} setBlogs={setBlogs} />
+          {blogs.sort((blogA, blogB) => blogB.likes - blogA.likes).map(blog =>
+            <Blog
+              key={blog.id}
+              blog={blog}
+              blogsArray={blogs}
+              setBlogs={setBlogs}
+              setSuccessMessage={setSuccessMessage}
+              setErrorMessage={setErrorMessage}
+            />
           )}
         </>
         :
