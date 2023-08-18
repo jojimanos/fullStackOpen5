@@ -1,7 +1,7 @@
 import { useState } from "react"
 import blogs from "../services/blogs"
 
-const Blog = ({ blog, toggleBlogForm, setToggleBlogForm, blogsArray, setBlogs, setSuccessMessage }) => {
+const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage }) => {
 
   const [showDetails, setShowDetails] = useState(true)
 
@@ -20,9 +20,9 @@ const Blog = ({ blog, toggleBlogForm, setToggleBlogForm, blogsArray, setBlogs, s
 
       const updatedBlogs = blogsArray.map((prevBlog) =>
         prevBlog.id === updatedBlog.id ? updatedBlog : prevBlog
-      );
+      )
 
-      setBlogs(updatedBlogs);
+      setBlogs(updatedBlogs)
       setSuccessMessage("Blog updated")
       setTimeout(() => {
         setSuccessMessage("")
@@ -64,7 +64,7 @@ const Blog = ({ blog, toggleBlogForm, setToggleBlogForm, blogsArray, setBlogs, s
       <p>
         {blog.title}
       </p>
-      {showDetails ? <>
+      {showDetails ? <div className="hidden">
         <p>
           {blog.author}
         </p>
@@ -78,8 +78,8 @@ const Blog = ({ blog, toggleBlogForm, setToggleBlogForm, blogsArray, setBlogs, s
         <p>
  {/* eslint-disable-next-line */}
           Created by {blog.user?.userName}
-        </p></> : null}
-      <button onClick={() => { setShowDetails(!showDetails) }}>
+        </p></div> : null}
+      <button className="hide-view" onClick={() => { setShowDetails(!showDetails) }}>
         {showDetails === false ? "view" : "hide"}</button>
       <button onClick={handleDelete}>Delete</button>
     </div>
