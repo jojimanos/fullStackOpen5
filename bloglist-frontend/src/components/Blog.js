@@ -3,7 +3,7 @@ import blogs from "../services/blogs"
 
 const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage }) => {
 
-  const [showDetails, setShowDetails] = useState(true)
+  const [showDetails, setShowDetails] = useState(false)
 
   const handleLikes = async () => {
     let id = blog.id
@@ -43,7 +43,7 @@ const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage }) => {
     try {
       window.confirm("Do you want to delete this blog?")
       await blogs.deleteBlog(id)
-      const newBlogList = blogsArray.filter(b => {return b.id !== id})
+      const newBlogList = blogsArray.filter(b => { return b.id !== id })
       console.log(newBlogList)
       setBlogs(newBlogList)
       setSuccessMessage("Blog deleted")
@@ -61,22 +61,22 @@ const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage }) => {
 
   return (
     <div className="blog">
-      <p>
+      <p className="title">
         {blog.title}
       </p>
+      <p className="author">
+        {blog.author}
+      </p>
       {showDetails ? <div className="hidden">
-        <p>
-          {blog.author}
-        </p>
-        <p>
+        <p className="url">
           {blog.url}
         </p>
-        <p>
+        <p className="likes">
           {blog.likes}
           <button onClick={handleLikes}>like</button>
         </p>
         <p>
- {/* eslint-disable-next-line */}
+          {/* eslint-disable-next-line */}
           Created by {blog.user?.userName}
         </p></div> : null}
       <button className="hide-view" onClick={() => { setShowDetails(!showDetails) }}>
