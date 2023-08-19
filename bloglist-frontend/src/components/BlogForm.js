@@ -7,6 +7,7 @@ const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUr
                 <div>
                     author <input
                         className="author"
+                        id="author"
                         type="text"
                         value={author}
                         name="Author"
@@ -18,6 +19,8 @@ const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUr
                 <br />
                 <div>
                     title <input
+                        className="title"
+                        id="title"
                         type="text"
                         value={title}
                         name="Title"
@@ -27,6 +30,8 @@ const BlogForm = ({ handleCreate, author, setAuthor, title, setTitle, url, setUr
                 <br />
                 <div>
                     url <input
+                        className="url"
+                        id="url"
                         type="text"
                         value={url}
                         name="Url"

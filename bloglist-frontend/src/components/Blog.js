@@ -1,7 +1,7 @@
 import { useState } from "react"
 import blogs from "../services/blogs"
 
-const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage }) => {
+const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage, user }) => {
 
   const [showDetails, setShowDetails] = useState(false)
 
@@ -73,15 +73,15 @@ const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage }) => {
         </p>
         <p className="likes">
           {blog.likes}
-          <button onClick={handleLikes}>like</button>
+          <button id="likeButton" onClick={handleLikes}>like</button>
         </p>
         <p>
           {/* eslint-disable-next-line */}
           Created by {blog.user?.userName}
         </p></div> : null}
-      <button className="hide-view" onClick={() => { setShowDetails(!showDetails) }}>
+      <button id="hide-view" className="hide-view" onClick={() => { setShowDetails(!showDetails) }}>
         {showDetails === false ? "view" : "hide"}</button>
-      <button onClick={handleDelete}>Delete</button>
+      {user.userName === blog.user?.userName ? <button onClick={handleDelete}>Delete</button> : null}
     </div>
   )
 }

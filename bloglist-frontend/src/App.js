@@ -114,6 +114,7 @@ const App = () => {
               setBlogs={setBlogs}
               setSuccessMessage={setSuccessMessage}
               setErrorMessage={setErrorMessage}
+              user={user}
             />
           )}
         </>
