@@ -43,7 +43,7 @@ test('hidden content (url, likes) appears, button text switches to hide', async 
     }
   };
 
-  render(<Blog blog={mockBlog}/>)
+  render(<Blog blog={mockBlog} />)
 
   const user = userEvent.setup()
   const container = document.querySelector('.hide-view')
@@ -51,7 +51,7 @@ test('hidden content (url, likes) appears, button text switches to hide', async 
   const element = screen.getByText('hide')
   const urlElement = document.querySelector('.url')
   const likesElement = document.querySelector('.likes')
-  
+
 
   screen.debug(element)
   screen.debug(urlElement)
@@ -60,4 +60,35 @@ test('hidden content (url, likes) appears, button text switches to hide', async 
   expect(urlElement).toBeDefined()
   expect(likesElement).toBeDefined()
 
+})
+
+test('likes button pressed twice', async () => {
+
+  const mockBlog = {
+    id: 1,
+    author: 'Test Author',
+    title: 'Test Title',
+    url: 'http://test-url.com',
+    likes: 10,
+    user: {
+      userName: 'testuser'
+    }
+  };
+
+  const mockFunction = jest.fn()
+
+  render(
+    <p className="likes">
+      {mockBlog.likes}
+      <button onClick={mockFunction}>like</button>
+    </p>
+  )
+
+  const user = userEvent.setup()
+
+  const likesButton = screen.getByText('like')
+  await user.click(likesButton)
+  await user.click(likesButton)
+
+  expect(mockFunction.mock.calls).toHaveLength(2)
 })
