@@ -1,12 +1,18 @@
 describe('blog app', function () {
   beforeEach(function () {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    const user = {
+    const firstUser = {
       name: 'gandalf',
       userName: 'gandalf',
       password: '123456'
     }
-    cy.request('POST', 'http://localhost:3003/api/users/', user)
+    const secondUser = {
+      name: 'openheimer',
+      userName: 'openheimer',
+      password: '123456'
+    }
+    cy.request('POST', 'http://localhost:3003/api/users/', firstUser)
+    cy.request('POST', 'http://localhost:3003/api/users/', secondUser)
     cy.visit('http://localhost:3000')
   })
   it('login form is shown', function () {
@@ -76,6 +82,52 @@ describe('blog app', function () {
 
       cy.get('#hide-view').click()
       cy.get('#likeButton').click()
+    })
+    it('user can delete created blog', () => {
+      cy.get('#userName').type('gandalf')
+      cy.get('#password').type('123456')
+      cy.get('#submitButton').click()
+
+      cy.contains('Welcome gandalf')
+      cy.contains('blogs')
+      cy.contains('create blog').click()
+
+      cy.get('#author').type('guenon')
+      cy.get('#title').type('vedanta')
+      cy.get('#url').type('url')
+
+      cy.contains('Create').click()
+
+      cy.contains('vedanta')
+
+      cy.contains("Delete").click()
+
+      cy.contains('vedanta').should('not.exist')
+    })
+    it('only creator can see the delete button', () => {
+      cy.get('#userName').type('gandalf')
+      cy.get('#password').type('123456')
+      cy.get('#submitButton').click()
+
+      cy.contains('Welcome gandalf')
+      cy.contains('blogs')
+      cy.contains('create blog').click()
+
+      cy.get('#author').type('guenon')
+      cy.get('#title').type('vedanta')
+      cy.get('#url').type('url')
+
+      cy.contains('Create').click()
+
+      cy.contains('Logout').click()
+
+      cy.contains('Login')
+
+      cy.get('#userName').type('openheimer')
+      cy.get('#password').type('123456')
+      cy.get('#submitButton').click()
+
+      cy.contains('Delete').should('not.exist')
     })
   })
 })

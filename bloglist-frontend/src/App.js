@@ -36,6 +36,8 @@ const App = () => {
       )
       blogService.setToken(user.token)
       setUser(user)
+      setUserName("")
+      setPassword("")
       setSuccessMessage("User logged successfuly")
       setTimeout(() => {
         setSuccessMessage("")
@@ -60,6 +62,7 @@ const App = () => {
       setTimeout(() => {
         setSuccessMessage("")
       }, 5000)
+      blogFormRef.current.toggleVisibility()
     } catch (error) {
       console.log("Create blog error", error.message)
       setErrorMessage(`Error while creating the blog ${error.message}`)
@@ -67,7 +70,6 @@ const App = () => {
         setErrorMessage("")
       }, 5000)
     }
-    blogFormRef.current.toggleVisibility()
   }
 
   const handleLogout = () => {
