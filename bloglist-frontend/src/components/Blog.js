@@ -60,7 +60,7 @@ const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage, user }) => {
   }
 
   return (
-    <div className="blog">
+    <div id={blog.likes} className="blog">
       <p className="title">
         {blog.title}
       </p>
@@ -81,7 +81,7 @@ const Blog = ({ blog, blogsArray, setBlogs, setSuccessMessage, user }) => {
         </p></div> : null}
       <button id="hide-view" className="hide-view" onClick={() => { setShowDetails(!showDetails) }}>
         {showDetails === false ? "view" : "hide"}</button>
-      {user.userName === blog.user?.userName ? <button onClick={handleDelete}>Delete</button> : null}
+      {user?.userName === blog.user?.userName ? <button onClick={handleDelete}>Delete</button> : null}
     </div>
   )
 }

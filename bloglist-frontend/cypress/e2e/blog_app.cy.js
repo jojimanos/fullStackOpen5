@@ -129,5 +129,38 @@ describe('blog app', function () {
 
       cy.contains('Delete').should('not.exist')
     })
+    it('blogs are ordered by likes', () => {
+      cy.get('#userName').type('gandalf')
+      cy.get('#password').type('123456')
+      cy.get('#submitButton').click()
+
+      cy.contains('create blog').click()
+      cy.get('#author').type('guenon')
+      cy.get('#title').type('vedanta')
+      cy.get('#url').type('url')
+
+      cy.contains('Create').click()
+
+      cy.get('#hide-view').eq(0).click()
+      cy.get('#likeButton').click()
+      cy.get('#1')
+      cy.get('#likeButton').click()
+      cy.get('#2')
+      cy.get('#hide-view').eq(0).click()
+
+      cy.contains('create blog').click()
+      cy.get('#author').type('guenon')
+      cy.get('#title').type('the cross')
+      cy.get('#url').type('url')
+
+      cy.contains('Create').click()
+      cy.contains('the cross').click()
+
+      cy.contains('the cross').parent().find('#hide-view').click()
+      cy.contains('the cross').parent().find('#likeButton').click()
+
+      cy.get(".blog").first().should('contain', 'vedanta')
+      cy.get(".blog").eq(1).should('contain', 'the cross')
+    })
   })
 })
